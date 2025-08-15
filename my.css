@@ -62,4 +62,5 @@ padding: 10px;
 background: rgb(74, 60, 166);
 display:block ;
 
+user-select: none;
 }
