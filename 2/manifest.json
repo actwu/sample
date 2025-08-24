@@ -1,0 +1,15 @@
+{
+  "name": "bruh",
+  "short_name": "bruh",
+  "start_url": "index.html",
+  "display": "bruh",
+  "background_color": "",
+  "theme_color": "",
+  "icons": [
+    {
+      "src": "",
+      "sizes": "",
+      "type": "sample.png"
+    }
+  ]
+}

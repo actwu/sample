@@ -1,0 +1,69 @@
+
+:root {
+background: black;
+color: white;
+--bdr:15px;
+}
+* {
+background: black;
+color: white;
+
+border-radius: var(--bdr);
+}
+
+* p,* h1 {
+background: transparent;
+}
+
+a {
+padding:0.05in 0.15in;
+background: rgb(60, 88, 159);
+}
+
+::-webkit-scrollbar {
+background: #222;
+}
+::-webkit-scrollbar-thumb {
+background: #333; 
+}
+
+body {
+font-family: sans-serif;
+flex-direction: column;
+display: flex;
+max-width: 399px;
+height: 100svh;
+place-content: center;
+margin: auto;
+margin-top: 0.1in;
+}
+
+set {
+gap: 5px;
+display: flex;
+flex-direction: column;
+}
+
+[uno] {
+background-color: #222;
+padding: 0.2in;
+}
+
+textarea {
+display: flex;
+background-color: #333;
+border: none;
+width: auto;
+flex: auto;
+padding: 0.1in;
+outline: none;
+max-height: auto;
+resize: vertical;
+
+font-family: sans-serif;
+}
+
+::placeholder {
+color: #888;
+font-family: sans-serif;
+}
