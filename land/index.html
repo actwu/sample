@@ -24,8 +24,16 @@
             --purple-glow-bg: 
                 linear-gradient(180deg, 
                     rgba(var(--primary-rgb), 0.012) 0%, 
-                    rgba(var(--primary-rgb), 0.25) 5%, 
+                    rgba(var(--primary-rgb), 0.25) 0%, 
                     rgba(var(--primary-rgb), 0.012) 60%
+                );
+
+--purple-glow-bg2: 
+                linear-gradient(180deg, 
+                    rgba(var(--primary-rgb), 0.012) 5%,
+rgba(var(--primary-rgb), 0.012) 10%,
+                    rgba(var(--primary-rgb), 0.25) 89%
+                   
                 );
         }
 
@@ -80,6 +88,9 @@
             padding: 6rem 2rem;
             background: var(--purple-glow-bg);
         }
+[a2] {
+background: var(--purple-glow-bg2);
+}
 
         [data-section="alt"] { background: var(--bg); }
 
@@ -158,10 +169,9 @@
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
             overflow: hidden;
 
-            /* Etched border: Top light source, Bottom fade */
+            
             border: 1.25px solid transparent;
-            background-image: linear-gradient(var(--bg), var(--bg)), 
-                              linear-gradient(180deg, rgba(var(--primary-rgb), 0.4) 0%, rgba(var(--primary-rgb), 0) 100%);
+            
             background-origin: border-box;
             background-clip: padding-box, border-box;
 
@@ -256,7 +266,7 @@
             </div>
         </section>
 
-        <section data-section="security">
+        <section a2 data-section="security">
             <div data-ui="tag">Privacy First</div>
             <h2 data-ui="header">Biological Privacy.</h2>
             <p data-ui="sub">Your voice print is your own. We use decentralized storage so you alone hold the encryption keys.</p>
