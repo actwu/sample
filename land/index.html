@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Your Tone | Sampl AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* --- MASTER COLOR CONTROL --- */
+            /* Change these numbers to change the entire site's theme */
+            --primary-rgb: 139, 92, 246; 
+            
+            --bg: #050505;
+            --primary: rgb(var(--primary-rgb));
+            --primary-glow: #c084fc; 
+            --text-main: #fafaff;
+            --text-fade: #f3e8ff;
+
+            /* Dynamic Background using the variable */
+            --purple-glow-bg: 
+                linear-gradient(180deg, 
+                    rgba(var(--primary-rgb), 0.012) 0%, 
+                    rgba(var(--primary-rgb), 0.25) 5%, 
+                    rgba(var(--primary-rgb), 0.012) 60%
+                );
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body, html {
+            height: 100%;
+            overflow: hidden;
+            background: var(--bg);
+            color: var(--text-main);
+        }
+
+        main[data-container="snap"] {
+            height: 100vh;
+            overflow-y: auto;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
+
+        [data-layout="sticky-nav"] {
+            position: fixed;
+            top: 0; width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 8%;
+            z-index: 1000;
+            background: linear-gradient(
+                180deg, 
+                rgba(255, 255, 255, 0.08) 0%, 
+                rgba(var(--primary-rgb), 0.12) 50%,
+            );
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        [data-section] {
+            min-height: 100dvh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            position: relative;
+            padding: 6rem 2rem;
+            background: var(--purple-glow-bg);
+        }
+
+        [data-section="alt"] { background: var(--bg); }
+
+        [data-grid="features"] {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 1100px;
+            margin-top: 3rem;
+        }
+
+        [data-ui="card"] {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(var(--primary-rgb), 0.1);
+            padding: 2.5rem;
+            border-radius: 24px;
+            transition: 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        [data-ui="card"]:hover {
+            border-color: var(--primary);
+            background: rgba(var(--primary-rgb), 0.04);
+            transform: translateY(-5px);
+        }
+
+        [data-ui="tag"] {
+            border: 1.25px solid rgba(var(--primary-rgb), 0.15);
+            background: linear-gradient(180deg, rgba(var(--primary-rgb), 0.02) 0%, rgba(var(--primary-rgb), 0.06) 90%);
+            padding: 8px 18px;
+            border-radius: 100px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-fade);
+            margin-bottom: 1.5rem;
+        }
+
+        [data-ui="header"] {
+            font-size: clamp(2.8rem, 7vw, 5.5rem);
+            font-weight: 600;
+            letter-spacing: -0.04em;
+            line-height: 1.1;
+            text-align: center;
+            background: linear-gradient(180deg, #fff 70%, rgba(var(--primary-rgb), 0.5) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        [data-ui="sub"] {
+            color: #f3e8ff;
+            opacity: 0.78;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 3.8rem;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        /* --- VARIABLE-DRIVEN SUBTLE CTA --- */
+        [data-ui="cta"] {
+            position: relative;
+            background: linear-gradient(180deg, rgba(var(--primary-rgb), 0.03) 0%, rgba(var(--primary-rgb), 0.01) 90%);
+            backdrop-filter: blur(12px); 
+            -webkit-backdrop-filter: blur(12px);
+            color: #f3e8ff; 
+            padding: 0.8rem 2rem;
+            border-radius: 100px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            overflow: hidden;
+
+            /* Etched border: Top light source, Bottom fade */
+            border: 1.25px solid transparent;
+            background-image: linear-gradient(var(--bg), var(--bg)), 
+                              linear-gradient(180deg, rgba(var(--primary-rgb), 0.4) 0%, rgba(var(--primary-rgb), 0) 100%);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+
+            box-shadow: 
+                inset 0 -4px 15px rgba(var(--primary-rgb), 0.1),
+                inset 0 1px 1px rgba(var(--primary-rgb), 0.2);
+        }
+
+        [data-ui="cta"]::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 100%;
+            background: radial-gradient(circle at 50% 0%, rgba(var(--primary-rgb), 0.18) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        [data-ui="cta"]:hover {
+            background: rgba(var(--primary-rgb), 0.1);
+            border-color: rgba(var(--primary-rgb), 0.5);
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 
+                0 8px 25px rgba(0, 0, 0, 0.5),
+                0 0 15px rgba(var(--primary-rgb), 0.15),
+                inset 0 1px 1px rgba(255, 255, 255, 0.1);
+        }
+
+        [data-ui="logo-mark"] {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 28px; height: 28px;
+            background: var(--primary);
+            border-radius: 6px;
+            margin-right: 12px;
+            font-size: 12px;
+            font-weight: 900;
+            color: white;
+            box-shadow: inset 0 1px 1px rgba(255,255,255,0.4);
+        }
+
+        [data-layout="footer"] {
+            height: 60dvh;
+            scroll-snap-align: end;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+    <nav data-layout="sticky-nav">
+        <div style="display:flex; align-items:center;">
+            <div data-ui="logo-mark"><i>s</i></div>
+            <div style="font-weight:700; font-size:1.3rem; letter-spacing: -1px;">Sampl</div>
+        </div>
+        <div style="display:flex; gap: 35px; align-items:center;">
+            <a href="#" style="color:var(--text-fade); text-decoration:none; font-size:0.9rem;">About</a>
+            <a href="#" data-ui="cta" style="padding: 0.6rem 1.6rem; font-size: 0.85rem;">Use</a>
+        </div>
+    </nav>
+
+    <main data-container="snap">
+         
+        <section data-section="hero">
+            <div data-ui="tag">AI • Voice Clone • Security</div>
+            <h1 data-ui="header">Set your tone Free</h1>
+            <p data-ui="sub" style="margin-bottom:0.8rem; font-size: 1.2rem;">Save your voice for tomorrow.</p>
+            <a href="#" data-ui="cta">Get Started Free</a>
+        </section>
+
+        <section data-section="alt">
+            <div data-ui="tag">Capabilities</div>
+            <h2 data-ui="header" style="font-size: 3rem;">Engineered for Pro's.</h2>
+            <div data-grid="features">
+                <div data-ui="card">
+                    <h3 style="margin-bottom:1rem">Zero Latency</h3>
+                    <p style="color:var(--text-fade); font-size:0.9rem">Stream cloned audio in real-time with sub-50ms processing speed.</p>
+                </div>
+                <div data-ui="card">
+                    <h3 style="margin-bottom:1rem">Emotion Logic</h3>
+                    <p style="color:var(--text-fade); font-size:0.9rem">Our neural engine detects and mimics subtle emotional inflections.</p>
+                </div>
+                <div data-ui="card">
+                    <h3 style="margin-bottom:1rem">Multi-Lingual</h3>
+                    <p style="color:var(--text-fade); font-size:0.9rem">Clone once, speak in 45+ languages while maintaining your unique timbre.</p>
+                </div>
+            </div>
+        </section>
+
+        <section data-section="security">
+            <div data-ui="tag">Privacy First</div>
+            <h2 data-ui="header">Biological Privacy.</h2>
+            <p data-ui="sub">Your voice print is your own. We use decentralized storage so you alone hold the encryption keys.</p>
+        </section>
+
+        <section data-section="pricing">
+            <div data-ui="tag">Flexible Plans</div>
+            <h2 data-ui="header" style="font-size: 3rem;">Scales with you.</h2>
+            <div data-grid="features">
+                <div data-ui="card">
+                    <p style="color:var(--primary-glow); font-weight:700; margin-bottom:0.5rem">Hobbyist</p>
+                    <h3 style="font-size:2rem; margin-bottom:1rem">$0</h3>
+                    <ul style="list-style:none; color:var(--text-fade); font-size:0.85rem; line-height:2">
+                        <li>• 1 Custom Voice</li>
+                        <li>• 10,000 Characters</li>
+                    </ul>
+                </div>
+                <div data-ui="card" style="border-color: var(--primary); background: rgba(var(--primary-rgb), 0.05)">
+                    <p style="color:var(--primary-glow); font-weight:700; margin-bottom:0.5rem">Professional</p>
+                    <h3 style="font-size:2rem; margin-bottom:1rem">$29</h3>
+                    <ul style="list-style:none; color:var(--text-fade); font-size:0.85rem; line-height:2">
+                        <li>• Unlimited Voices</li>
+                        <li>• 500,000 Characters</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section data-section="alt">
+            <h2 data-ui="header">Unlock your echo.</h2>
+            <p data-ui="sub">Join the next generation of audio interface engineering.</p>
+            <a href="#" data-ui="cta" style="padding: 1.2rem 3.5rem;">Create Your First Clone</a>
+        </section>
+
+        <footer data-layout="footer">
+            <div style="display:flex; align-items:center; margin-bottom:2rem;">
+                <div data-ui="logo-mark"><i>s</i></div>
+                <div style="font-weight:700; font-size:1.8rem; letter-spacing: -1px;">Sampl</div>
+            </div>
+            <p style="color: rgba(255,255,255,0.15); font-size: 0.75rem;">© 2025 Sampl AI. Built for the future.</p>
+        </footer>
+
+    </main>
+</body>
+</html>
